@@ -3,10 +3,9 @@ package com.example.sensorer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
-public class GraphcisActivity extends AppCompatActivity {
+public class GraphicsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
