@@ -2,12 +2,14 @@ package com.example.sensorer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,14 +19,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SensorManager sensorManager;
-        ListView sensorView = (ListView) findViewById(R.id.lv_sensor);
-        ArrayAdapter<String> adapter;
+        List<String> list = new ArrayList<>();
 
-        sensorManager = (SensorManager) getSystemService(this.SENSOR_SERVICE);
-        List<Sensor> deviceSensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
+        ((ListView) findViewById(R.id.lv_sensor)).setAdapter(new ArrayAdapter<>(
+                this, android.R.layout.simple_list_item_1, list));
 
+        List<Sensor> deviceSensors = ((SensorManager) getSystemService(this.SENSOR_SERVICE))
+                .getSensorList(Sensor.TYPE_ALL);
 
+        for (Sensor sensor : deviceSensors) {
+            String str = sensor.toString();
+            list.add(str);
+        }
 
+        findViewById(R.id.btn_accellerometer).setOnClickListener(view ->
+                startActivity(new Intent(this, AccActivity.class))
+        );
     }
 }
